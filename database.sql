@@ -1,0 +1,51 @@
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS projetb2;
+
+-- Création de l'utilisateur
+CREATE USER IF NOT EXISTS 'projetb2'@'localhost' IDENTIFIED BY 'password';
+
+-- Attribution des privilèges
+GRANT ALL PRIVILEGES ON projetb2.* TO 'projetb2'@'localhost';
+FLUSH PRIVILEGES;
+
+USE projetb2;
+
+-- Structure des tables
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    is_admin BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE skills (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_skills (
+    user_id INT,
+    skill_id INT,
+    level ENUM('débutant', 'intermédiaire', 'expert'),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (skill_id) REFERENCES skills(id),
+    PRIMARY KEY (user_id, skill_id)
+);
+
+CREATE TABLE projects (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_path VARCHAR(255),
+    external_link VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Insertion des données de test
+INSERT INTO users (email, password, is_admin) VALUES
+('admin@example.com', '$2y$10$YourHashedPasswordHere', TRUE),
+('user@example.com', '$2y$10$YourHashedPasswordHere', FALSE);

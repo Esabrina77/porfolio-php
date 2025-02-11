@@ -1,0 +1,48 @@
+.skill-item {
+    background: var(--light-bg);
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--primary-color);
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skill-level {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.level-débutant {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.level-intermédiaire {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.level-avancé {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.level-expert {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-title {
+    color: var(--primary-color);
+    margin-bottom: 0;
+} 

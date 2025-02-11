@@ -1,7 +1,8 @@
 <?php
+
 class Database {
     private static $instance = null;
-    private $connection;
+    private $pdo;
 
     private function __construct() {
         // Charger les variables d'environnement
@@ -17,7 +18,7 @@ class Database {
         }
 
         try {
-            $this->connection = new PDO(
+            $this->pdo = new PDO(
                 "mysql:host=" . $_ENV['DB_HOST'] . 
                 ";dbname=" . $_ENV['DB_NAME'] . 
                 ";charset=utf8",
@@ -40,7 +41,17 @@ class Database {
         return self::$instance;
     }
 
+    public function query($sql, $params = []) {
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch(PDOException $e) {
+            die("Erreur de requête : " . $e->getMessage());
+        }
+    }
+
     public function getConnection() {
-        return $this->connection;
+        return $this->pdo;
     }
 }

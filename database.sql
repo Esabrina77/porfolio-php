@@ -11,11 +11,14 @@ FLUSH PRIVILEGES;
 USE projetb2;
 
 -- Structure des tables
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE,
+    remember_token VARCHAR(100) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -48,8 +51,8 @@ CREATE TABLE projects (
 
 -- Insertion des données de test
 INSERT INTO users (email, password, is_admin) VALUES
-('admin@example.com', '$2y$10$YourHashedPasswordHere', TRUE),
-('user@example.com', '$2y$10$YourHashedPasswordHere', FALSE);
+('admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', TRUE),  -- password: password
+('user@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', FALSE);  -- password: password
 
 -- Insertion de quelques compétences
 INSERT INTO skills (name, description) VALUES

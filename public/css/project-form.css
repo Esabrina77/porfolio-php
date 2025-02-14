@@ -1,0 +1,76 @@
+.project-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.project-form .card {
+    border: none;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 12px;
+}
+
+.project-form .card-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 12px 12px 0 0;
+    padding: 1.5rem;
+}
+
+.project-form .form-label {
+    font-weight: 500;
+    color: var(--dark-bg);
+    margin-bottom: 0.5rem;
+}
+
+.project-form .form-control {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.project-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.project-preview {
+    max-width: 300px;
+    margin: 1rem 0;
+}
+
+.project-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.project-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.custom-file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.custom-file-upload input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-preview {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    text-align: center;
+} 

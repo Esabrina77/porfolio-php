@@ -1,0 +1,18 @@
+Options -Indexes
+RewriteEngine On
+
+# Rediriger vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Protéger les fichiers sensibles
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Empêcher l'accès aux dossiers sensibles
+RedirectMatch 403 ^/includes/?$
+RedirectMatch 403 ^/models/?$
+RedirectMatch 403 ^/controllers/?$
+RedirectMatch 403 ^/logs/?$ 

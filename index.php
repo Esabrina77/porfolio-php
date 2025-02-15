@@ -9,6 +9,9 @@ require_once 'controllers/AuthController.php';
 require_once 'config/database.php';
 require_once 'controllers/AdminSkillController.php';
 require_once 'controllers/AdminProjectController.php';
+require_once 'controllers/AdminUserController.php';
+require_once 'controllers/SearchController.php';
+require_once __DIR__ . '/includes/error_handler.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = trim($uri, '/');
@@ -239,6 +242,25 @@ switch ($uri) {
         }
         $projectController = new ProjectController();
         $projectController->update($matches[1]);
+        break;
+
+    // Route pour éditer un utilisateur
+    case (preg_match('/^admin\/users\/edit\/(\d+)$/', $uri, $matches) ? true : false):
+        if (!isset($_SESSION['user']) || !$_SESSION['user']['is_admin']) {
+            header('Location: /login');
+            exit;
+        }
+        $adminUserController = new AdminUserController();
+        $userData = $adminUserController->edit($matches[1]);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            render('admin/users/edit', $userData, 'admin/layout');
+        }
+        break;
+
+    case 'search':
+        $searchController = new SearchController();
+        $searchResults = $searchController->search();
+        render('projects/index', ['searchResults' => $searchResults]);
         break;
 
     default:

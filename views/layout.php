@@ -18,6 +18,9 @@
     <link href="/css/forms.css" rel="stylesheet">
     <link href="/css/skills.css" rel="stylesheet">
     <link href="/css/project-form.css" rel="stylesheet">
+    
+    <!-- JavaScript de validation des formulaires -->
+    <script src="/public/js/form-validation.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">

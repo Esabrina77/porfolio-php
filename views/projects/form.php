@@ -89,6 +89,9 @@
                   method="POST" 
                   enctype="multipart/form-data">
                 
+                <?php require_once __DIR__ . '/../../includes/csrf.php'; ?>
+                <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                
                 <div class="mb-3">
                     <label for="title" class="form-label">Titre du projet</label>
                     <input type="text" 

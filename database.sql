@@ -51,8 +51,8 @@ CREATE TABLE projects (
 
 -- Insertion des données de test
 INSERT INTO users (email, password, is_admin) VALUES
-('admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', TRUE),  -- password: password
-('user@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', FALSE);  -- password: password
+('admin@example.com', '$2y$10$1CAQa77QW8Qv6y7yImdkZuOxPFkQyifoWJ38vDNpcmkZkf9R8tTFW', TRUE),  -- mot de passe réel
+('user@example.com', '$2y$10$FUjrFcJ/dfsNsNYOn1yUeOhvGWHZMyxwnaiB1EW9oeqaTjM3Z5dR.', FALSE);  -- mot de passe réel
 
 -- Insertion de quelques compétences
 INSERT INTO skills (name, description) VALUES

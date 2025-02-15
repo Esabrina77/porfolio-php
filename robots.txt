@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /models/
+Disallow: /controllers/
+Allow: /public/
+Allow: / 

@@ -81,4 +81,10 @@ class Project {
             $id
         ]);
     }
+
+    public function delete($id) {
+        $sql = "DELETE FROM projects WHERE id = :id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        return $stmt->execute(['id' => $id]);
+    }
 }

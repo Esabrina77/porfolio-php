@@ -3,19 +3,40 @@ require_once __DIR__ . '/../models/Project.php';
 
 class ProjectController {
     private $projectModel;
+    private $db;
 
     public function __construct() {
         $this->projectModel = new Project();
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function index() {
-        if (!isset($_SESSION['user'])) {
-            header('Location: /login');
-            exit;
-        }
-        
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+
+        $sql = "SELECT p.*, u.email as user_email 
+                FROM projects p 
+                LEFT JOIN users u ON p.user_id = u.id 
+                ORDER BY p.created_at DESC 
+                LIMIT :limit OFFSET :offset";
+                
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $projects = $stmt->fetchAll();
+
+        // Compte total pour la pagination
+        $totalSql = "SELECT COUNT(*) FROM projects";
+        $total = $this->db->query($totalSql)->fetchColumn();
+        $pages = ceil($total / $limit);
+
         return [
-            'projects' => $this->projectModel->getUserProjects($_SESSION['user']['id'])
+            'projects' => $projects,
+            'currentPage' => $page,
+            'totalPages' => $pages,
+            'limit' => $limit
         ];
     }
 
@@ -26,6 +47,10 @@ class ProjectController {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            require_once __DIR__ . '/../includes/csrf.php';
+            if (!validateCsrfToken($_POST['csrf_token'] ?? '')) {
+                die('Token CSRF invalide');
+            }
             $title = $_POST['title'] ?? '';
             $description = $_POST['description'] ?? '';
             $externalLink = $_POST['external_link'] ?? '';

@@ -14,29 +14,35 @@ class ProjectController {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
+        $search = $_GET['search'] ?? '';
 
         $sql = "SELECT p.*, u.email as user_email 
                 FROM projects p 
                 LEFT JOIN users u ON p.user_id = u.id 
+                WHERE p.title LIKE :search OR p.description LIKE :search
                 ORDER BY p.created_at DESC 
                 LIMIT :limit OFFSET :offset";
                 
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':search', "%$search%", PDO::PARAM_STR);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $projects = $stmt->fetchAll();
 
-        // Compte total pour la pagination
-        $totalSql = "SELECT COUNT(*) FROM projects";
-        $total = $this->db->query($totalSql)->fetchColumn();
+        // Compte total pour la pagination avec le filtre de recherche
+        $totalSql = "SELECT COUNT(*) FROM projects p WHERE p.title LIKE :search OR p.description LIKE :search";
+        $stmt = $this->db->prepare($totalSql);
+        $stmt->bindValue(':search', "%$search%", PDO::PARAM_STR);
+        $stmt->execute();
+        $total = $stmt->fetchColumn();
         $pages = ceil($total / $limit);
 
         return [
             'projects' => $projects,
             'currentPage' => $page,
             'totalPages' => $pages,
-            'limit' => $limit
+            'search' => $search
         ];
     }
 

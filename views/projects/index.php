@@ -11,14 +11,13 @@
     </div>
 
     <div class="search-container mb-4">
-        <form method="GET" action="/search" class="d-flex gap-2">
+        <form method="GET" class="d-flex gap-2">
             <input type="text" 
-                   name="q" 
+                   name="search" 
                    class="form-control" 
-                   placeholder="Rechercher un projet ou une compétence..."
-                   value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
-                   minlength="2"
-                   required>
+                   placeholder="Rechercher un projet..."
+                   value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
+                   minlength="2">
             <button type="submit" class="btn btn-primary">Rechercher</button>
         </form>
     </div>

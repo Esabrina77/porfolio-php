@@ -6,15 +6,15 @@ Une application web de gestion de portfolio permettant aux utilisateurs de prés
 
 ### Utilisateurs
 - Inscription et connexion sécurisée
-- Gestion du profil utilisateur
-- Upload d'avatar
-- Gestion des projets personnels
+- Gestion des projets personnels (CRUD)
+- Recherche de projets
+- Pagination des résultats
 - Gestion des compétences
 
 ### Administrateurs
 - Gestion des utilisateurs
 - Gestion globale des projets
-- Gestion des compétences disponibles
+- Gestion des compétences globales.
 - Tableau de bord administratif
 
 ## 📋 Prérequis
@@ -22,33 +22,27 @@ Une application web de gestion de portfolio permettant aux utilisateurs de prés
 - PHP 8.0 ou supérieur
 - MySQL/MariaDB 10.4 ou supérieur
 - Serveur web (Apache/Nginx)
-- Composer (pour les dépendances)
 
 ## 🔧 Installation
 
 1. Cloner le repository
 ```bash
-git clone https://github.com/votre-username/portfolio-manager.git
-cd portfolio-manager
+git clone https://github.com/Esabrina77/portfolio-php.git
+cd portfolio-php
 ```
 
 2. Configurer la base de données
 ```bash
-mysql -u root -p < database/database.sql
+mysql -u root -p < database.sql
 ```
 
-3. Configurer les variables d'environnement
-```php
-DB_HOST = 'localhost'
-DB_PORT = 3306
-DB_NAME = 'projetb2'
-DB_USER = 'projetb2'
-DB_PASS = 'password'
-```
-
-4. Démarrer le serveur de développement
-```bash
-php -S localhost:8000
+3. Configurer le .env
+```env
+DB_HOST=localhost
+DB_NAME=projetb2
+DB_USER=projetb2
+DB_PASS=password
+DB_PORT=3306
 ```
 
 ## 👥 Comptes de test
@@ -76,11 +70,10 @@ portfolio-manager/
 
 ## 🔒 Sécurité
 
-- Protection contre les injections SQL
-- Protection XSS
-- Hachage des mots de passe
+- Protection CSRF
 - Validation des données
 - Sessions sécurisées
+- Protection XSS
 
 ## 📱 Interface utilisateur
 
@@ -105,6 +98,6 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 👨‍💻 Auteur
 
-[Votre Nom]
-- GitHub: [@votre-username](https://github.com/Esabrina77)
+Sabrina ELOUNDOU
+- GitHub: [@Esabrina77](https://github.com/Esabrina77)
 - Email: sabrina.eloundou@ynov.com
